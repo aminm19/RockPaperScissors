@@ -1,6 +1,7 @@
 let humanScore = 0;
 let computerScore = 0;
 
+//generate random choice for computer
 function getComputerChoice() {
     const choices = ["rock", "paper", "scissors"];
     const min = 0;
@@ -13,6 +14,7 @@ function getUserChoice() {
     const userInput = prompt("Please enter your choice:");
     return userInput.toLowerCase();
 }
+//determine winner using hard coded choices
 function playRound (userChoice, computerChoice){
     switch(userChoice){
         case "rock":
@@ -52,11 +54,13 @@ function playRound (userChoice, computerChoice){
             break;
     }
 }
-    function playGame(){
-        while(humanScore < 5 && computerScore < 5){
-            let userChoice = getUserChoice();
-            let computerChoice = getComputerChoice();
-            playRound(userChoice, computerChoice);
+
+//playGame function will call all necessary functions to play the game
+function playGame(){
+    while(humanScore < 5 && computerScore < 5){
+        let userChoice = getUserChoice();
+        let computerChoice = getComputerChoice();
+        playRound(userChoice, computerChoice);
         }
         console.log(`Final Score - You: ${humanScore}, Computer: ${computerScore}`);
     }
