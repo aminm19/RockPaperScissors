@@ -1,5 +1,15 @@
 let humanScore = 0;
 let computerScore = 0;
+const rockBtn = document.querySelector('.rock'); 
+const scissorsBtn = document.querySelector('.scissors'); 
+const paperBtn = document.querySelector('.paper'); 
+
+//add event listeners for buttons to trigger game start
+document.addEventListener('DOMContentLoaded', () => {
+    rockBtn.addEventListener('click', () => playGame('rock', getComputerChoice()));
+    paperBtn.addEventListener('click', () => playGame('paper', getComputerChoice()));
+    scissorsBtn.addEventListener('click', () => playGame('scissors', getComputerChoice()));
+});
 
 //generate random choice for computer
 function getComputerChoice() {
@@ -7,47 +17,43 @@ function getComputerChoice() {
     const min = 0;
     const max = 2;
     const randomInt = Math.floor(Math.random() * (max - min + 1)) + min;
-    console.log(choices[randomInt]);
     return choices[randomInt];
 }
-function getUserChoice() {
-    const userInput = prompt("Please enter your choice:");
-    return userInput.toLowerCase();
-}
+
 //determine winner using hard coded choices
-function playRound (userChoice, computerChoice){
-    switch(userChoice){
+function playRound (humanChoice, computerChoice){
+    switch(humanChoice){
         case "rock":
             if(computerChoice === "scissors"){
                 humanScore++;
-                console.log("Rock crushes scissors. You win!");
+                document.getElementById("result").textContent = "Rock crushes scissors. You win!";
             } else if(computerChoice === "paper"){
                 computerScore++;
-                console.log("Paper covers rock. You lose!");
+                document.getElementById("result").textContent = "Paper covers rock. You lose!";
             }else{
-                console.log("It's a tie!");
+                document.getElementById("result").textContent = "It's a tie!";
             }
             break;
         case "scissors":
             if(computerChoice === "paper"){
                 humanScore++;
-                console.log("Scissors cuts paper. You win!");
+                document.getElementById("result").textContent = "Scissors cuts paper. You win!";
             } else if(computerChoice === "rock"){
                 computerScore++;
-                console.log("Rock crushes scissors. You lose!");
+                document.getElementById("result").textContent = "Rock crushes scissors. You lose!";
             }else{
-                console.log("It's a tie!");
+                document.getElementById("result").textContent = "It's a tie!";
             }
             break;
         case "paper":
             if(computerChoice === "rock"){
                 humanScore++;
-                console.log("Paper covers rock. You win!");
+                document.getElementById("result").textContent = "Paper covers rock. You win!";
             } else if(computerChoice === "scissors"){
                 computerScore++;
-                console.log("Scissors cuts paper. You lose!");
+                document.getElementById("result").textContent = "Scissors cuts paper. You lose!";
             }else{
-                console.log("It's a tie!");
+                document.getElementById("result").textContent = "It's a tie!";
             }
             break;
         default:
@@ -56,11 +62,8 @@ function playRound (userChoice, computerChoice){
 }
 
 //playGame function will call all necessary functions to play the game
-function playGame(){
-    while(humanScore < 5 && computerScore < 5){
-        let userChoice = getUserChoice();
-        let computerChoice = getComputerChoice();
-        playRound(userChoice, computerChoice);
-        }
-        console.log(`Final Score - You: ${humanScore}, Computer: ${computerScore}`);
+function playGame(humanChoice, computerChoice){
+        playRound(humanChoice, computerChoice);
+        document.getElementById("humanScore").textContent = `You: ${humanScore}`;
+        document.getElementById("computerScore").textContent = `Computer: ${computerScore}`;
     }
